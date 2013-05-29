@@ -2,8 +2,8 @@
 <project basedir="." default="war">
 	<property file="build.properties"/>
 	<property name="src.dir" value="src"/>
-	<property name="build.dir" value="${basedir}/WebContent/WEB-INF/classes"/>
-	<property name="lib.dir" value="${basedir}/WebContent/WEB-INF/lib" />
+	<property name="build.dir" value="${basedir}/war/WEB-INF/classes"/>
+	<property name="lib.dir" value="${basedir}/war/WEB-INF/lib" />
 	<property name="dist.dir" value="dist"/>
 	<property name="dist.name" value="springapp"/>
 	
@@ -32,12 +32,12 @@
 	
 	<target name="war" depends="cleanup, build">
 		<echo>Dist name is ${dist.name}.war</echo>
-		<war destfile="${dist.dir}/${dist.name}.war" webxml="${basedir}/WebContent/WEB-INF/web.xml" basedir="${basedir}/WebContent"/>
+		<war destfile="${dist.dir}/${dist.name}.war" webxml="${basedir}/war/WEB-INF/web.xml" basedir="${basedir}/war"/>
 	</target>
 
 	<target name="rapper" depends="cleanup, build,deploy">
 		<echo>Dist name is ${dist.name}.war</echo>
-		<war destfile="${dist.dir}/${dist.name}.war" webxml="${basedir}/WebContent/WEB-INF/web.xml" basedir="${basedir}/WebContent"/>
+		<war destfile="${dist.dir}/${dist.name}.war" webxml="${basedir}/war/WEB-INF/web.xml" basedir="${basedir}/war"/>
 		<copy todir="${appserver.autodeploy}" verbose="yes" file="${dist.dir}/${dist.name}.war"/>
 	</target>
 	
