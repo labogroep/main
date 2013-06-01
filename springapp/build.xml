@@ -8,7 +8,7 @@
 	<property name="dist.name" value="springapp"/>
     <property name="test.dir" value="test"/>
 	
-	<path id="build.classpath">
+	<path id="master-classpath">
 		<fileset dir="${lib.dir}">
 			<include name="*.jar"/>
 		</fileset>
@@ -27,7 +27,7 @@
 		<mkdir dir="${build.dir}"/>
 		<javac destdir="${build.dir}" source="1.7" target="1.7" debug="true">
 		<src path="${src.dir}"/>
-		<classpath refid="build.classpath"/>
+		<classpath refid="master-classpath"/>
 		</javac>
 	</target>
 	
