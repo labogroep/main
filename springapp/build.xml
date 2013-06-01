@@ -7,6 +7,7 @@
 	<property name="dist.dir" value="dist"/>
 	<property name="dist.name" value="springapp"/>
     <property name="test.dir" value="test"/>
+	<property name="web.dir" value="war"/>
 	
 	<presetdef name="javac">
 		<javac includeantruntime="false"/>
@@ -50,6 +51,15 @@
 		<copy todir="${appserver.autodeploy}" verbose="yes" file="${dist.dir}/${dist.name}.war"/>
 	</target>
 	
+    <path id="test-classpath">
+        <fileset dir="${web.dir}/WEB-INF/lib">
+            <include name="*.jar"/>
+        </fileset>
+        <pathelement path="${build.dir}"/>
+        <pathelement path="${test.dir}"/>
+        <pathelement path="${web.dir}/WEB-INF/classes"/>
+    </path>
+	
     <target name="buildtests" description="Compile test tree java files">
         <mkdir dir="${build.dir}"/>
         <javac destdir="${build.dir}" debug="true"
@@ -65,9 +75,9 @@
             haltonfailure="false"
             failureproperty="tests.failed"
             showoutput="true">
-            <classpath refid="master-classpath"/>
+            <classpath refid="test-classpath"/>
             <formatter type="brief" usefile="false"/>
-            
+        	
             <batchtest>
                 <fileset dir="${build.dir}">
                     <include name="**/*Tests.*"/>
