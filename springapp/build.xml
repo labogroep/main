@@ -3,10 +3,14 @@
 	<property file="build.properties"/>
 	<property name="src.dir" value="src"/>
 	<property name="build.dir" value="${basedir}/war/WEB-INF/classes"/>
-	<property name="lib.dir" value="${basedir}/war/WEB-INF/lib" />
+	<property name="lib.dir" value="${basedir}/war/WEB-INF/lib"/>
 	<property name="dist.dir" value="dist"/>
 	<property name="dist.name" value="springapp"/>
     <property name="test.dir" value="test"/>
+	
+	<presetdef name="javac">
+		<javac includeantruntime="false"/>
+	</presetdef>
 	
 	<path id="master-classpath">
 		<fileset dir="${lib.dir}">
@@ -25,7 +29,7 @@
 	
 	<target name="build">
 		<mkdir dir="${build.dir}"/>
-		<javac destdir="${build.dir}" source="1.7" target="1.7" debug="true">
+		<javac destdir="${build.dir}" debug="true">
 		<src path="${src.dir}"/>
 		<classpath refid="master-classpath"/>
 		</javac>
@@ -48,7 +52,7 @@
 	
     <target name="buildtests" description="Compile test tree java files">
         <mkdir dir="${build.dir}"/>
-        <javac destdir="${build.dir}" source="1.5" target="1.5" debug="true"
+        <javac destdir="${build.dir}" debug="true"
             deprecation="false" optimize="false" failonerror="true">
             <src path="${test.dir}"/>
             <classpath refid="master-classpath"/>
