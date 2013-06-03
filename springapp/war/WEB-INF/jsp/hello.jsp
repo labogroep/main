@@ -12,5 +12,6 @@
     <br>
     	<a href="<c:url value="priceincrease.htm"/>">Increase Prices</a>
     <br>
+    	<a href="<c:url value="api/person/random.json"/>">JSON</a>
   </body>
 </html>

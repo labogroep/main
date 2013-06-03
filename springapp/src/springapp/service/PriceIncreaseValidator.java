@@ -1,11 +1,13 @@
 package springapp.service;
 
+import org.springframework.stereotype.Service;
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+@Service
 public class PriceIncreaseValidator implements Validator {
     private int DEFAULT_MIN_PERCENTAGE = 0;
     private int DEFAULT_MAX_PERCENTAGE = 50;

@@ -1,5 +1,9 @@
 package springapp.web;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -13,6 +17,8 @@ import org.apache.commons.logging.LogFactory;
 import springapp.service.ProductManager;
 import springapp.service.PriceIncrease;
 
+//@Controller
+//@RequestMapping("/priceincrease.htm")
 public class PriceIncreaseFormController extends SimpleFormController {
 
     /** Logger for this class and subclasses */
@@ -20,7 +26,8 @@ public class PriceIncreaseFormController extends SimpleFormController {
 
     private ProductManager productManager;
 
-    public ModelAndView onSubmit(Object command)
+    //@RequestMapping(method = RequestMethod.POST)
+    public ModelAndView onSubmit(@ModelAttribute("priceIncrease") Object command)
             throws ServletException {
 
         int increase = ((PriceIncrease) command).getPercentage();
@@ -32,7 +39,9 @@ public class PriceIncreaseFormController extends SimpleFormController {
 
         return new ModelAndView(new RedirectView(getSuccessView()));
     }
-
+    
+    //FIXME: [Jef]{optional}//@ ModelAttribute("priceIncrease")
+    //@RequestMapping(method = RequestMethod.GET)
     protected Object formBackingObject(HttpServletRequest request) throws ServletException {
         PriceIncrease priceIncrease = new PriceIncrease();
         priceIncrease.setPercentage(20);
