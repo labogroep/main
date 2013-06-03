@@ -3,7 +3,8 @@
 	<property file="build.properties"/>
 	<property name="src.dir" value="src"/>
 	<property name="build.dir" value="${basedir}/war/WEB-INF/classes"/>
-	<property name="lib.dir" value="${basedir}/war/WEB-INF/lib"/>
+	<property name="lib.dest.dir" value="${basedir}/war/WEB-INF/lib"/>
+	<property name="lib.src.dir" value="${basedir}/lib/current"/>
 	<property name="dist.dir" value="dist"/>
 	<property name="dist.name" value="springapp"/>
     <property name="test.dir" value="test"/>
@@ -14,11 +15,7 @@
 	</presetdef>
 	
 	<path id="master-classpath">
-		<fileset dir="${lib.dir}">
-			<include name="*.jar"/>
-			<exclude name="**/directory/*"/>
-		</fileset>
-		<fileset dir="${lib.dir}/springV3/">
+		<fileset dir="${lib.src.dir}">
 			<include name="*.jar"/>
 		</fileset>
 		<fileset dir="${appserver.lib}">
@@ -27,9 +24,8 @@
 	</path>
 	
     <path id="test-classpath">
-        <fileset dir="${web.dir}/WEB-INF/lib">
+        <fileset dir="${lib.src.dir}">
             <include name="*.jar"/>
-        	<include name="**/springV3/*.jar"/>
         </fileset>
         <pathelement path="${build.dir}"/>
         <pathelement path="${test.dir}"/>
@@ -38,13 +34,18 @@
 	
 	<target name="cleanup">
 		<delete file="${build.dir}/*.*" verbose="true"/>
+		<delete includeemptydirs="true">
+		    <fileset dir="${lib.dest.dir}">
+		          <include name="**/*.jar" />
+		    </fileset>
+		</delete>
 		<delete file="${dist.dir}/${dist.name}.war" verbose="true" failonerror="false"/>
 		<mkdir dir="${dist.dir}"/>
 	</target>
 	
 	<target name="build">
 		<mkdir dir="${build.dir}"/>
-		<copy todir="${lib.dir}" verbose="true">
+		<copy todir="${lib.dest.dir}" verbose="true">
 			<path><path refid="master-classpath" /></path>
 		</copy>
 		<javac destdir="${build.dir}" debug="true">

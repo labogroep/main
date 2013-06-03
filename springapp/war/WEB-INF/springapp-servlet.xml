@@ -21,13 +21,24 @@
 
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="messages"/>
+        <property name="defaultEncoding" value="UTF-8"/>
     </bean>
+ 
+ 	<mvc:interceptors>
+	<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+    	<property name="paramName" value="lang" />
+	</bean>
+	</mvc:interceptors>
+ 
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+    	<property name="defaultLocale" value="en"/>
+	</bean>
     
     <bean name="/hello.htm" class="springapp.web.InventoryController">
         <property name="productManager" ref="productManager"/>
     </bean>
 
-    <!-- <bean name="/home.htm" class="springapp.web.PersonController">
+<!--     <bean name="/home.htm">
     </bean> -->
 
     <bean name="/priceincrease.htm" class="springapp.web.PriceIncreaseFormController">
@@ -42,12 +53,16 @@
         <property name="productManager" ref="productManager"/>
     </bean>
     
+    <!-- oxm integration -->  
+  	<bean id="objectXmlMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller" />  
+    
     <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
     <property name="ignoreAcceptHeader" value="true" />
     <!--<property name="favorPathExtension" value="false" />-->
     <property name="mediaTypes">
         <map>
             <entry key="json" value="application/json" />
+            <entry key="xml" value="application/xml"/>
         </map>
     </property>
     <property name="viewResolvers">
@@ -62,6 +77,9 @@
     <property name="defaultViews">
         <list>
             <bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+            <bean class="org.springframework.web.servlet.view.xml.MarshallingView">
+            	<property name="marshaller" ref="objectXmlMarshaller" />
+			</bean>
         </list>
     </property>
 </bean>

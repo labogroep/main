@@ -46,7 +46,7 @@ label {
 </style>
 </head>
 <body>
-
+	<jsp:include page="locale_menu.jsp" />
 	<div id="container">
 
 		<h1>Person Page</h1>

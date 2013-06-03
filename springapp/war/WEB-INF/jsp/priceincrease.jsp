@@ -9,6 +9,7 @@
   </style>  
 </head>
 <body>
+<jsp:include page="locale_menu.jsp" />
 <h1><fmt:message key="priceincrease.heading"/></h1>
 <form:form method="post" commandName="priceIncrease">
   <table width="95%" bgcolor="f8f8ff" border="0" cellspacing="0" cellpadding="5">
