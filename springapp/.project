@@ -3,6 +3,8 @@
 	<name>springapp</name>
 	<comment></comment>
 	<projects>
+		<project>ejb</project>
+		<project>ejbClient</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
