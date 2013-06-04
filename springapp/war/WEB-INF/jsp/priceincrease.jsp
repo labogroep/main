@@ -3,6 +3,7 @@
 
 <html>
 <head>
+<meta charset="UTF-8">
   <title><fmt:message key="title"/></title>
     <c:url value="/static/css/main.css" var="resourceUrl"/>
 	<link media="screen" rel="stylesheet" href="${resourceUrl}" type="text/css" /> 
@@ -12,19 +13,19 @@
 <div id="container">
 	<h1><fmt:message key="priceincrease.heading"/></h1>
 	<form:form method="post" commandName="priceIncrease">
-	  <table width="95%" bgcolor="f8f8ff" border="0" cellspacing="0" cellpadding="5">
+	  <table class="single_table">
 	    <tr>
-	      <td align="right" width="20%">Increase (%):</td>
-	        <td width="20%">
+	      <td class="per20">Increase (%):</td>
+	        <td class="per20">
 	          <form:input path="percentage"/>
 	        </td>
-	        <td width="60%">
+	        <td class="per60">
 	          <form:errors path="percentage" cssClass="error"/>
 	        </td>
 	    </tr>
 	  </table>
 	  <br>
-	  <input type="submit" align="center" value="Execute">
+	  <input type="submit" value="Execute">
 	</form:form>
 	<a href="<c:url value="hello.htm"/>">Home</a>
 </div>

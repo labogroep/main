@@ -1,6 +1,17 @@
-@CHARSET "US-ASCII";
+@charset "UTF-8";
 
 header, footer, section, aside, nav, article { display: block; }
+
+li{display:inline}
+a{display:block}
+ul
+{
+list-style-type:none;
+margin:0;
+padding:0;
+overflow:hidden;
+}
+
 
 header#page_header {
  width: 100%;
@@ -12,6 +23,7 @@ header#page_header nav
 {
   	background-color:#2C5463;
   	height:30px;
+  	margin: 0px;
 }
 
 header#page_header nav ul {
@@ -47,42 +59,70 @@ nav ul li a:hover {
 
 
 
-header#page_header aside ul {
+header#page_header nav ul li aside ul {
  list-style: none;
  margin: 0;
  padding: 0;
 }
 
-#page_header aside
+#page_header nav ul li aside
 {
 	float:right;
 }
 
-#page_header aside ul li {
- block;
- margin: 0;
- width: 10px;
- padding: 1px;
+#page_header nav ul li aside ul li {
+ 	display: inline;
+ 	background: #ff0000;
+ 	margin: 0;
+ 	padding: 1px;
 }
 
 /* FIXME:-> before li, but those are misplaced */
-#page_header aside ul li a:before {
-content: " | ";
+#page_header nav ul li aside ul li a:before {
+	content: " | ";
 }
 
-#page_header aside ul li:first-child:before {
-content: none;
+#page_header nav ul li aside ul li:first-child:before {
+	content: none;
 }
 
-#page_header aside ul li a
+#page_header nav ul li aside ul li a
 {
-	display: inline;
+	/* display: inline; */
+	display:block;
 	width: 10px;
 	padding: 7px 15px 3px 15px;
 }
 
 
+#single_table
+{
+	width:95%;
+	background-color:#f8f8ff;
+	border: 0px;
+	border-spacing:0;
+  	border-collapse:collapse;
+}
 
+#single_table td
+{
+	text-align: right;
+}
+
+#per20
+{
+	width: 20%
+}
+
+#per60
+{
+	width: 60%
+}
+
+input
+{
+	text-align:center;
+}
 
 
 
@@ -90,6 +130,7 @@ content: none;
 body {
 	background-color: #eee;
 	font: helvetica;
+	margin: 0px;
 }
 
 #container {
@@ -98,7 +139,9 @@ body {
 	margin: 30px auto;
 	padding: 30px;
 	border-radius: 5px;
-	box-shadow: 5px;
+	-moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px#888;
+	box-shadow: 0 0 5px #888;
 }
 
 .green {

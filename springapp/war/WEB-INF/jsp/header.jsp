@@ -1,4 +1,6 @@
-<%@ include file="/WEB-INF/jsp/include.jsp" %>
+<%@ page session="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <header id="page_header">
 	<nav>
 	    <ul>

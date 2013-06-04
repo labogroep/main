@@ -2,6 +2,7 @@
 
 <html>
   <head>
+  <meta charset="UTF-8">
   	<title><fmt:message key="title"/></title>
   	<c:url value="/static/css/main.css" var="resourceUrl"/>
 	<link media="screen" rel="stylesheet" href="${resourceUrl}" type="text/css" />

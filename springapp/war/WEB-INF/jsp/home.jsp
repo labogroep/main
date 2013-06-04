@@ -4,6 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>Spring MVC - Ajax</title>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   	<c:url value="/static/css/main.css" var="resourceUrl"/>
