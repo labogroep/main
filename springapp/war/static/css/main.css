@@ -130,7 +130,15 @@ input
 	text-align:center;
 }
 
+input#percentage
+{
+	text-align:left;
+}
 
+li.home_link a
+{
+	font-weight:bold;
+}
 
 
 body {

@@ -15,7 +15,7 @@
 	<form:form method="post" commandName="priceIncrease">
 	  <table class="single_table">
 	    <tr>
-	      <td class="per20">Increase (%):</td>
+	      <td class="per20"><fmt:message key="priceincrease.increase"/> (%):</td>
 	        <td class="per20">
 	          <form:input path="percentage"/>
 	        </td>
@@ -25,9 +25,8 @@
 	    </tr>
 	  </table>
 	  <br>
-	  <input type="submit" value="Execute">
+	  <input type="submit" value=<fmt:message key="Execute"/>>
 	</form:form>
-	<a href="<c:url value="hello.htm"/>">Home</a>
 </div>
 </body>
 </html>

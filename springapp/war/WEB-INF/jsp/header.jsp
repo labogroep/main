@@ -4,6 +4,9 @@
 <header id="page_header">
 	<nav>
 	    <ul>
+	    	<li class="home_link">
+	    		<a href="<c:url value="hello.htm"/>">Home</a>
+	    	</li>
 	    	<li>
 	    		<a href="<c:url value="priceincrease.htm"/>"><fmt:message key="prices.increase"/></a>
 	    	</li>
