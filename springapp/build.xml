@@ -50,7 +50,7 @@
 		</copy>
 		<javac destdir="${build.dir}" debug="true">
 			<src path="${src.dir}"/>
-			<classpath refid="${lib.dir}"/>
+			<classpath refid="master-classpath"/>
 		</javac>
 	</target>
 	
