@@ -13,7 +13,7 @@
 	    	<li>
 	    		<a href="<c:url value="api/person/random.xml"/>">Restlet? XML</a>
 	    	</li>
-	    	<li>
+	    	<li id="languageSelection">
 				<aside>
 			    	<ul>
 			    		<li>
