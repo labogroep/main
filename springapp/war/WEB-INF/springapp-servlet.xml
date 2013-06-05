@@ -42,7 +42,7 @@
 <!--     <bean name="/home.htm">
     </bean> -->
 
-    <bean name="/priceincrease.htm" class="springapp.web.PriceIncreaseFormController">
+<!--     <bean id="priceincrease" name="/priceincrease.htm" class="springapp.web.PriceIncreaseFormController">
         <property name="sessionForm" value="true"/> 
         <property name="commandName" value="priceIncrease"/> 
         <property name="commandClass" value="springapp.service.PriceIncrease"/> 
@@ -52,7 +52,7 @@
         <property name="formView" value="priceincrease"/>
         <property name="successView" value="hello.htm"/>
         <property name="productManager" ref="productManager"/>
-    </bean>
+    </bean> -->
  
     <!-- oxm integration -->  
   	<bean id="objectXmlMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller" />  

@@ -17,7 +17,7 @@ public class PriceIncreaseValidator implements Validator {
     /** Logger for this class and subclasses */
     protected final Log logger = LogFactory.getLog(getClass());
 
-    public boolean supports(Class clazz) {
+    public boolean supports(@SuppressWarnings("rawtypes") Class clazz) {
         return PriceIncrease.class.equals(clazz);
     }
 

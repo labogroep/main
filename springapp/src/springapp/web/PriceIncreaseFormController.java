@@ -1,12 +1,12 @@
 package springapp.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.SimpleFormController;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,42 +14,65 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import springapp.service.PriceIncreaseValidator;
 import springapp.service.ProductManager;
 import springapp.service.PriceIncrease;
 
-//@Controller
-//@RequestMapping("/priceincrease.htm")
-public class PriceIncreaseFormController extends SimpleFormController {
+@Controller
+@RequestMapping("/priceincrease.htm")
+public class PriceIncreaseFormController {
 
     /** Logger for this class and subclasses */
     protected final Log logger = LogFactory.getLog(getClass());
 
+    //FIXME: use property files? It seems to be normal that @Value doesn't work in controllers
+	//@Value("#{priceincrease['successView']}")
+	String successView="hello.htm";
+	String formView="priceincrease";
+    
     private ProductManager productManager;
 
-    //@RequestMapping(method = RequestMethod.POST)
-    public ModelAndView onSubmit(@ModelAttribute("priceIncrease") Object command)
+    PriceIncreaseValidator priceIncreaseValidator;
+    
+	@Autowired
+	public PriceIncreaseFormController(PriceIncreaseValidator priceIncreaseValidator, ProductManager productManager){
+		this.priceIncreaseValidator = priceIncreaseValidator;
+		this.productManager = productManager;
+	}
+    
+    @RequestMapping(method = RequestMethod.POST)
+    public String onSubmit(@ModelAttribute("priceIncrease") PriceIncrease priceIncrease, BindingResult result, SessionStatus status)
             throws ServletException {
 
-        int increase = ((PriceIncrease) command).getPercentage();
+
+        int increase = priceIncrease.getPercentage();
         logger.info("Increasing prices by " + increase + "%.");
 
-        productManager.increasePrice(increase);
-
-        logger.info("returning from PriceIncreaseForm view to " + getSuccessView());
-
-        return new ModelAndView(new RedirectView(getSuccessView()));
+        //productManager.increasePrice(increase);
+        
+        priceIncreaseValidator.validate(priceIncrease, result);
+		 
+		if (result.hasErrors()) {
+			//if validator failed
+			logger.info("returning from PriceIncreaseForm view to " + formView);
+			//return new ModelAndView(formView);
+			return formView;
+		} else {
+			productManager.increasePrice(increase);
+			status.setComplete();
+			//form success
+			logger.info("returning from PriceIncreaseForm view to " + successView);
+			//return new ModelAndView(new RedirectView(successView));
+			return "redirect:"+successView;
+		}
     }
-    
-    //FIXME: [Jef]{optional}//@ ModelAttribute("priceIncrease")
-    //@RequestMapping(method = RequestMethod.GET)
+
+    @ ModelAttribute("priceIncrease")
+    @RequestMapping(method = RequestMethod.GET)
     protected Object formBackingObject(HttpServletRequest request) throws ServletException {
         PriceIncrease priceIncrease = new PriceIncrease();
         priceIncrease.setPercentage(20);
         return priceIncrease;
-    }
-
-    public void setProductManager(ProductManager productManager) {
-        this.productManager = productManager;
     }
 
     public ProductManager getProductManager() {
