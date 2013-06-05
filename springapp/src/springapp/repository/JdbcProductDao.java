@@ -4,23 +4,36 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcDaoSupport;
+import org.springframework.stereotype.Repository;
 
 import springapp.domain.Product;
 
-public class JdbcProductDao extends SimpleJdbcDaoSupport implements ProductDao {
+//This annotation makes this class a bean
+@Repository
+public class JdbcProductDao extends NamedParameterJdbcTemplate implements ProductDao {
 
-    /** Logger for this class and subclasses */
+	public JdbcProductDao(DataSource dataSource) {
+		super(dataSource);
+		// TODO Auto-generated constructor stub
+	}
+
+	/** Logger for this class and subclasses */
     protected final Log logger = LogFactory.getLog(getClass());
 
 
     public List<Product> getProductList() {
         logger.info("Getting products!");
-        List<Product> products = getSimpleJdbcTemplate().query(
+        List<Product> products = query(
                 "select id, description, price from products", 
                 new ProductMapper());
         return products;
@@ -28,7 +41,7 @@ public class JdbcProductDao extends SimpleJdbcDaoSupport implements ProductDao {
 
     public void saveProduct(Product prod) {
         logger.info("Saving product: " + prod.getDescription());
-        int count = getSimpleJdbcTemplate().update(
+        int count = update(
             "update products set description = :description, price = :price where id = :id",
             new MapSqlParameterSource().addValue("description", prod.getDescription())
                 .addValue("price", prod.getPrice())
